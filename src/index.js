@@ -4,6 +4,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const { pageNotFound } = require('./functions/errors');
+const { connectDatabase } = require('./functions/connection');
 const { json } = require('body-parser');
 const userRoutes = require('./routes/users');
 const courseRoutes=require('./routes/courses');
@@ -13,7 +14,7 @@ const app = express();
 app.set('port', process.env.PORT || 5000);
 
 //connect to db
-
+connectDatabase(27017, 'courseRating').then(success => console.log(success)).catch(err => console.error(err));
 
 // morgan gives us http request logging
 app.use(morgan('dev'));
