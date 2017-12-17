@@ -3,7 +3,7 @@
 // load modules
 const express = require('express');
 const morgan = require('morgan');
-const { pageNotFound } = require('./middleware/errors');
+const { pageNotFound } = require('./functions/errors');
 const { json } = require('body-parser');
 const userRoutes = require('./routes/users');
 const courseRoutes=require('./routes/courses');
@@ -13,6 +13,7 @@ const app = express();
 app.set('port', process.env.PORT || 5000);
 
 //connect to db
+
 
 // morgan gives us http request logging
 app.use(morgan('dev'));
