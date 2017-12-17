@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const seeder = require('mongoose-seeder');
 const data = require('../data/data.json');
 
+//overwriting deprecated mongoose promise
+mongoose.Promise = require('bluebird');
+
 //Schemas
 const reviewSchema = require('../schemas/reviewSchema');
 const stepsSchema = require('../schemas/stepsSchema');
