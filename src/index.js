@@ -13,6 +13,9 @@ const app = express();
 // set our port
 app.set('port', process.env.PORT || 5000);
 
+//set parsing of requests
+app.use(json());
+
 //connect to db
 connectDatabase(27017, 'courseRating').then(success => console.log(success)).catch(err => console.error(err));
 
@@ -23,14 +26,11 @@ app.use(morgan('dev'));
 app.use('/api/users', userRoutes);
 app.use('/api/courses', courseRoutes);
 
-//set parsing of requests
-app.use(json());
-
 // catch 404 and forward to global error handler
 app.use((req, res, next) => next(pageNotFound()));
 
 // Express's global error handler
-app.use((err, req, res, next) => res.status(err.status || 500).json(err));
+app.use((err, req, res, next) => res.status(err.name === 'ValidationError' ? 400 : err.status || 500).json(err));
 
 // start listening on our port
 const server = app.listen(app.get('port'), () => console.log('Express server is listening on port ' + server.address().port));

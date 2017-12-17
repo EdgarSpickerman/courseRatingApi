@@ -35,8 +35,18 @@ const signInError = () => {
   return err;
 }
 
+//400 Errors
+const userAlreadyExist = () => {
+  let err = new Error();
+  err.name = 'User Already Exist';
+  err.message = 'Sorry, looks like that user already exist';
+  err.status = 400;
+  return err;
+}
+
 //Error exports
 module.exports.pageNotFound = pageNotFound;
 module.exports.noUserFound = noUserFound;
 module.exports.invalidPass = invalidPass;
 module.exports.signInError = signInError;
+module.exports.userAlreadyExist = userAlreadyExist;
