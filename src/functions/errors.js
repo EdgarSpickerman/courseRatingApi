@@ -18,6 +18,7 @@ const noUserFound = () => {
   err.status = 401;
   return err;
 }
+
 const invalidPass = () => {
   let err = new Error();
   err.name = 'Invalid/incorrect Password';
@@ -26,7 +27,16 @@ const invalidPass = () => {
   return err;
 }
 
+const signInError = () => {
+  let err = new Error();
+  err.name = 'Not sign/logged in';
+  err.message = 'Sorry, you must be logged in to use this service';
+  err.status = 401;
+  return err;
+}
+
 //Error exports
 module.exports.pageNotFound = pageNotFound;
 module.exports.noUserFound = noUserFound;
 module.exports.invalidPass = invalidPass;
+module.exports.signInError = signInError;
