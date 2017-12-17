@@ -4,6 +4,12 @@ const mongoose = require('mongoose');
 const seeder = require('mongoose-seeder');
 const data = require('../data/data.json');
 
+//Schemas
+const reviewSchema = require('../schemas/reviewSchema');
+const stepsSchema = require('../schemas/stepsSchema');
+const courseSchema = require('../schemas/courseSchema');
+const userSchema = require('../schemas/userSchema');
+
 //functions
 const connectDatabase = (port, dbName, opts) => {
 
@@ -25,11 +31,16 @@ const connectDatabase = (port, dbName, opts) => {
 
 const seedDB = () => {
   return new Promise((resolve, reject) => {
+    const review = mongoose.model('Review', reviewSchema);
+    const step = mongoose.model('Step', stepsSchema);
+    const course = mongoose.model('Course', courseSchema);
+    const user = mongoose.model('User', userSchema);
     seeder.seed(data)
       .then(dbData=>resolve('Database Seed Success'))
       .catch(err => reject('Database Seed Error' + err))
   });
 }
+
 //export
 module.exports.connectDatabase = connectDatabase;
 module.exports.seedDB = seedDB;
