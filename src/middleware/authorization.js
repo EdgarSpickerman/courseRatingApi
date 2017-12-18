@@ -59,9 +59,17 @@ const getCourse = (req, res, next) => {
     });
 }
 
+const updateCourse = (req, res, next) => {
+  req.body._id = req.params.courseId;
+  for (let prop in req.body) { req.course[prop] = req.body[prop]; }
+  req.course.save((err, course) => err ? next(err) : next());
+}
+
+
 //export authorization middleware
 module.exports.authorize = authorize;
 module.exports.postUser = postUser;
 module.exports.postCourse = postCourse;
+module.exports.updateCourse = updateCourse;
 module.exports.getCourses = getCourses;
 module.exports.getCourse = getCourse;
