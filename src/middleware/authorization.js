@@ -65,11 +65,21 @@ const updateCourse = (req, res, next) => {
   req.course.save((err, course) => err ? next(err) : next());
 }
 
+const updateReview = (req, res, next) => {
+  req.body.user = req.user._id;
+  review.create(req.body, (err, review) => {
+    if (err) next(err);
+    req.course.reviews.push(review._id);
+    req.course.save((err, course) => err ? next(err) : next())
+  })
+}
+
 
 //export authorization middleware
 module.exports.authorize = authorize;
 module.exports.postUser = postUser;
 module.exports.postCourse = postCourse;
 module.exports.updateCourse = updateCourse;
+module.exports.updateReview = updateReview;
 module.exports.getCourses = getCourses;
 module.exports.getCourse = getCourse;
