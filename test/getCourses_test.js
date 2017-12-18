@@ -4,7 +4,6 @@ const request = require('supertest');
 const { expect } = require('chai');
 const mongoose = require('mongoose');
 const app = require('../src/');
-const userSchema = require('../src/schemas/userSchema');
 
 //tests
 describe('GET /api/courses', function () {

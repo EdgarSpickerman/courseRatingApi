@@ -44,9 +44,18 @@ const userAlreadyExist = () => {
   return err;
 }
 
+const noCourseFound = () => {
+  let err = new Error();
+  err.name = 'No Course Found';
+  err.message = 'Sorry, no course was found with that course id';
+  err.status = 400;
+  return err;
+}
+
 //Error exports
 module.exports.pageNotFound = pageNotFound;
 module.exports.noUserFound = noUserFound;
+module.exports.noCourseFound = noCourseFound;
 module.exports.invalidPass = invalidPass;
 module.exports.signInError = signInError;
 module.exports.userAlreadyExist = userAlreadyExist;
