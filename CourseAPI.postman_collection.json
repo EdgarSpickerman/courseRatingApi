@@ -1,53 +1,70 @@
 {
 	"variables": [],
 	"info": {
-		"name": "Course API",
-		"_postman_id": "ee42e27b-f809-632f-1ac0-b402794f9807",
+		"name": "CourseRating API",
+		"_postman_id": "94dbe4d4-d330-a9ee-e958-6ad7cca91d7c",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Get Courses",
+			"name": "Get Users (No Auth)",
 			"request": {
-				"url": "localhost:5000/api/courses",
+				"url": "http://localhost:5000/api/users",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users (With Auth) bad pass",
+			"request": {
+				"url": "http://localhost:5000/api/users",
 				"method": "GET",
 				"header": [
 					{
-						"key": "Content-Type",
-						"value": "application/json",
+						"key": "Authorization",
+						"value": "Basic am9lQHNtaXRoLmNvbTo=",
 						"description": ""
-					},
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users (With Auth) bad user",
+			"request": {
+				"url": "http://localhost:5000/api/users",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic am9lQHNtaXRoOnBhc3N3b3Jk",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users (With Auth)",
+			"request": {
+				"url": "http://localhost:5000/api/users",
+				"method": "GET",
+				"header": [
 					{
 						"key": "Authorization",
 						"value": "Basic am9lQHNtaXRoLmNvbTpwYXNzd29yZA==",
 						"description": ""
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Awesome Recipe\",\n    \"prepTime\": 0,\n    \"ingredients\": [\n        {\n            \"item\": \"Potatoes\"\n        },\n        {\n        }\n    ],\n    \"steps\": [\n    ]\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Get Course",
-			"request": {
-				"url": "localhost:5000/api/courses/57029ed4795118be119cc43d",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Awesome Recipe\",\n    \"prepTime\": 0,\n    \"ingredients\": [\n        {\n            \"item\": \"Potatoes\"\n        },\n        {\n        }\n    ],\n    \"steps\": [\n    ]\n}"
-				},
+				"body": {},
 				"description": ""
 			},
 			"response": []
@@ -67,26 +84,6 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Create User",
-			"request": {
-				"url": "http://localhost:5000/api/users",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"fullName\": \"John Smith\",\n    \"emailAddress\": \"john@smith.com\",\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}"
 				},
 				"description": ""
 			},
@@ -113,35 +110,92 @@
 			"response": []
 		},
 		{
-			"name": "Get Users (No Auth)",
+			"name": "Create User",
 			"request": {
 				"url": "http://localhost:5000/api/users",
-				"method": "GET",
-				"header": [],
-				"body": {},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"John Smith\",\n    \"emailAddress\": \"john@smith.com\",\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}"
+				},
 				"description": ""
 			},
 			"response": []
 		},
 		{
-			"name": "Get Users (With Auth)",
+			"name": "Get Course (course doesnt exist)",
 			"request": {
-				"url": "http://localhost:5000/api/users",
+				"url": "localhost:5000/api/courses/57029ed4795118be11ddc43d",
 				"method": "GET",
 				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Awesome Recipe\",\n    \"prepTime\": 0,\n    \"ingredients\": [\n        {\n            \"item\": \"Potatoes\"\n        },\n        {\n        }\n    ],\n    \"steps\": [\n    ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Course (course exist)",
+			"request": {
+				"url": "localhost:5000/api/courses/57029ed4795118be119cc43d",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Awesome Recipe\",\n    \"prepTime\": 0,\n    \"ingredients\": [\n        {\n            \"item\": \"Potatoes\"\n        },\n        {\n        }\n    ],\n    \"steps\": [\n    ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Courses",
+			"request": {
+				"url": "localhost:5000/api/courses",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
 					{
 						"key": "Authorization",
 						"value": "Basic am9lQHNtaXRoLmNvbTpwYXNzd29yZA==",
 						"description": ""
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Awesome Recipe\",\n    \"prepTime\": 0,\n    \"ingredients\": [\n        {\n            \"item\": \"Potatoes\"\n        },\n        {\n        }\n    ],\n    \"steps\": [\n    ]\n}"
+				},
 				"description": ""
 			},
 			"response": []
 		},
 		{
-			"name": "Create Course (No Auth, Incomplete Data)",
+			"name": "Create Course (No Auth)",
 			"request": {
 				"url": "localhost:5000/api/courses",
 				"method": "POST",
@@ -161,7 +215,7 @@
 			"response": []
 		},
 		{
-			"name": "Create Course (Incomplete Data)",
+			"name": "Create Course ( Auth empty Body)",
 			"request": {
 				"url": "localhost:5000/api/courses",
 				"method": "POST",
@@ -180,6 +234,31 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Course (Auth with empty steps)",
+			"request": {
+				"url": "localhost:5000/api/courses",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic am9lQHNtaXRoLmNvbTpwYXNzd29yZA==",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"New Course\",\n    \"description\": \"My course description\",\n    \"user\": {\n        \"_id\": \"57029ed4795118be119cc437\"\n    },\n    \"steps\": [{}]\n}"
 				},
 				"description": ""
 			},
@@ -211,9 +290,9 @@
 			"response": []
 		},
 		{
-			"name": "Update Course (Minimum Data)",
+			"name": "update Course (Minimum Data) auth",
 			"request": {
-				"url": "localhost:5000/api/courses/5702a1fdf18e6ebd1292282e",
+				"url": "localhost:5000/api/courses/57029ed4795118be119cc43d",
 				"method": "PUT",
 				"header": [
 					{
@@ -229,7 +308,33 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"_id\": \"5702a1fdf18e6ebd1292282e\",\n    \"title\": \"New Course Updated Again Hello\",\n    \"description\": \"My course description. And again.\",\n    \"user\": {\n        \"_id\": \"57029ed4795118be119cc437\"\n    },\n    \"steps\": [\n        {\n            \"title\": \"Step 1\",\n            \"description\": \"My first step.\"\n        }\n    ]\n}\n"
+					"raw": "{\n\t\"_id\":\"57029ed4795118be119cc43d\",\n    \"title\": \"\",\n    \"description\": \"My course description\",\n    \"user\": {\n        \"_id\": \"57029ed4795118be119cc437\"\n    },\n    \"steps\": [\n        {\n            \"title\": \"Step 1\",\n            \"description\": \"My first step.\"\n        }\n    ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Review (no auth)",
+			"request": {
+				"url": "http://localhost:5000/api/courses/57029ed4795118be119cc43d/reviews",
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 2\n}"
 				},
 				"description": ""
 			},
