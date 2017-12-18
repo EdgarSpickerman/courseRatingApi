@@ -2,8 +2,9 @@
 //load modules
 const express = require('express');
 const router = express.Router();
+const { authorize, getCourses } = require('../middleware/authorization');
 
-router.get('/', (req, res, next) => res.send(200).json({ msg: 'hello' }));
+router.get('/', getCourses, (req, res, next) => res.status(200).json(req.courses));
 
 //export router
 module.exports = router;

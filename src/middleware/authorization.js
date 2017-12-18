@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 const auth = require('basic-auth');
 const userSchema = require('../schemas/userSchema');
+const courseSchema = require('../schemas/courseSchema');
 const { signInError, userAlreadyExist } = require('../functions/errors');
 
 //authorize middleware
@@ -26,6 +27,17 @@ const postUser = (req, res, next) => {
     })
 }
 
+const getCourses = (req,res,next) => {
+  mongoose.model('Course', courseSchema).find({})
+    .select('_id title')
+    .exec((err, models) => {
+      if (err) return next(err);
+      req.courses = models;
+      next();
+    })
+}
+
 //export authorization middleware
 module.exports.authorize = authorize;
 module.exports.postUser = postUser;
+module.exports.getCourses = getCourses;
