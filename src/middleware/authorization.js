@@ -33,6 +33,10 @@ const postUser = (req, res, next) => {
     })
 }
 
+const postCourse = (req, res, next) => {
+  course.create(req.body, err => err ? next(err) : next());
+}
+
 const getCourses = (req,res,next) => {
   course.find({})
     .select('_id title')
@@ -58,5 +62,6 @@ const getCourse = (req, res, next) => {
 //export authorization middleware
 module.exports.authorize = authorize;
 module.exports.postUser = postUser;
+module.exports.postCourse = postCourse;
 module.exports.getCourses = getCourses;
 module.exports.getCourse = getCourse;
