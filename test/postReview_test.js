@@ -46,7 +46,6 @@ describe('POST /api/courses/:courseId/review', function () {
       .exec((err, course) => {
         if (err) throw err;
         if (!course) throw noCourseFound();
-        console.log(course);
         expect(course.reviews[course.reviews.length - 1].rating).to.equal(postReview.rating);
         done();
       });

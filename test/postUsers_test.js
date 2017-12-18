@@ -13,6 +13,8 @@ let validBody = { "fullName": "John Smith", "emailAddress": "john@smith.com", "p
 
 let invalidBody = { "fullName": "Joe Smith", "emailAddress": "joe@smith.com", "password": "password", "confirmPassword": "password" };
 
+let invalidEmail = { "fullName": "Joe Smith", "emailAddress": "joe@smith", "password": "password", "confirmPassword": "password" };
+
 const getPostRes = (body, callback) => {
   request(app)
     .post('/api/users')
@@ -24,7 +26,7 @@ const getPostRes = (body, callback) => {
         expect(res.body).to.equal('');
       } else {
         expect(res.statusCode).to.equal(400);
-        if (body.opt) expect(res.body.name).to.equal('ValidationError')
+        if (res.body.errors) expect(res.body.name).to.equal('ValidationError')
         else expect(res.body.name).to.equal('User Already Exist');
       }
       callback();
@@ -43,5 +45,7 @@ describe('POST /api/users', function () {
   it('should return 400 status with existing user(userAlreadyExistError) with existing user', done => getPostRes(invalidBody, done));
 
   it('should return 400 status with errors(validationErrors) with missing form fields', done => getPostRes(incompleteBody, done));
+
+  it('should return 400 status with errors(validationErrors) with invalid email', done => getPostRes(invalidEmail, done));
 
 })

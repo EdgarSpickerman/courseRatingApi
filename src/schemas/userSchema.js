@@ -13,7 +13,14 @@ const userSchema = new Schema({
   },
   emailAddress: {
     type: String,
-    unique:true,
+    unique: true,
+    validate: {
+      validator: function (v) {
+        return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          .test(v);
+      },
+      message: 'You must enter a valid email Address'
+    },
     required: [true, 'Email Address is Required']
   },
   password: {
