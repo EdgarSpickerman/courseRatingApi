@@ -3,7 +3,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//declare review schema
+//declare stepSchema
+const stepSchema = new Schema({
+  stepNumber: Number,
+  title: {
+    type: String,
+    required: [true,'Step Title is required']
+  },
+  description: {
+    type: String,
+    required: [true, 'Step description is required']
+  }
+})
+
+//declare course schema
 const courseSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -20,8 +33,7 @@ const courseSchema = new Schema({
   estimatedTime: String,
   materialsNeeded: String,
   steps: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Steps',
+    type: stepSchema,
     required: true
   }],
   reviews: [{
